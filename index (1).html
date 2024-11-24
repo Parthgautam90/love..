@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxurious Greeting Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: radial-gradient(circle at center, #ff9a9e, #fad0c4, #fbc2eb);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: gradientBG 8s infinite alternate;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 100% 100%;
+      }
+    }
+
+    /* Welcome Page */
+    #welcome-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    #welcome-page h1 {
+      font-size: 3rem;
+      font-family: 'Great Vibes', cursive;
+      color: #ff4081;
+      margin-bottom: 20px;
+    }
+
+    #welcome-page p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    #welcome-page input {
+      padding: 15px;
+      font-size: 1.2rem;
+      border-radius: 25px;
+      border: 2px solid #ff7eb3;
+      outline: none;
+      width: 90%;
+      margin-bottom: 20px;
+    }
+
+    #welcome-page button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff85e4, #ff4081);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0px 10px 20px rgba(255, 0, 127, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #welcome-page button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 15px 30px rgba(255, 0, 127, 0.7);
+    }
+
+    /* Greeting Card */
+    #card-container {
+      display: none;
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #card-header {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      padding: 20px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #card-content {
+      padding: 20px 30px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    #card-content h2 {
+      font-size: 2rem;
+      color: #ff4081;
+      margin-bottom: 15px;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    #card-content p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    /* Floating Flowers */
+    #flower-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .flower {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Red_rose_icon.svg/1200px-Red_rose_icon.svg.png');
+      background-size: cover;
+      animation: floatFlowers 6s infinite ease-in-out;
+    }
+
+    @keyframes floatFlowers {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Page -->
+  <div id="welcome-page">
+    <h1>Welcome!</h1>
+    <p>Enter your name to see a magical greeting card created just for you!</p>
+    <input type="text" id="girl-name" placeholder="Enter your name..." />
+    <button onclick="showGreetingCard()">Create Greeting</button>
+  </div>
+
+  <!-- Greeting Card -->
+  <div id="card-container">
+    <div id="card-header">A Special Message</div>
+    <div id="card-content">
+      <h2 id="personal-name"></h2>
+      <p>
+        You light up the world, <span id="dynamic-name"></span>,<br>
+        with your laughter and presence.<br>
+        This card is for you: a reminder of how cherished and loved you are.
+      </p>
+      <p>
+        May your days be filled with joy, love, and endless blessings.<br>
+        Remember, you’re unique, amazing, and irreplaceable.
+      </p>
+    </div>
+    <div id="flower-container"></div>
+  </div>
+
+  <script>
+    const welcomePage = document.getElementById('welcome-page');
+    const cardContainer = document.getElementById('card-container');
+    const personalName = document.getElementById('personal-name');
+    const dynamicName = document.getElementById('dynamic-name');
+    const flowerContainer = document.getElementById('flower-container');
+
+    // Show greeting card after name submission
+    function showGreetingCard() {
+      const nameInput = document.getElementById('girl-name').value.trim();
+      if (nameInput === '') {
+        alert('Please enter a name!');
+        return;
+      }
+
+      // Display name dynamically
+      personalName.textContent = `Dear ${nameInput},`;
+      dynamicName.textContent = nameInput;
+
+      // Transition to greeting card
+      welcomePage.style.display = 'none';
+      cardContainer.style.display = 'block';
+
+      // Create floating flowers
+      createFlowers();
+    }
+
+    // Create floating flowers
+    function createFlowers() {
+      for (let i = 0; i < 20; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+
+        // Randomize position and size
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = Math.random() * 4 + 4 + 's';
+        flower.style.opacity = Math.random() * 0.7 + 0.3;
+
+        flowerContainer.appendChild(flower);
+
+        // Remove after animation
+        setTimeout(() => flower.remove(), 6000);
+      }
+    }
+  </script>
+</body>
+</html>
